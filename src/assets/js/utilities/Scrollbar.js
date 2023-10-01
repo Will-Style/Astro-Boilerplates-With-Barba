@@ -2,7 +2,7 @@ import barba from "@barba/core";
 import UAParser from "ua-parser-js";
 import { 
   OverlayScrollbars, 
-//   ScrollbarsHidingPlugin, 
+  ScrollbarsHidingPlugin, 
   SizeObserverPlugin, 
   ClickScrollPlugin 
 } from 'overlayscrollbars';
@@ -21,7 +21,7 @@ export default class {
             this.isIOS = true;
         }
         barba.hooks.beforeOnce((data) => {
-            OverlayScrollbars.plugin([SizeObserverPlugin,ClickScrollPlugin]);
+            OverlayScrollbars.plugin([ScrollbarsHidingPlugin,SizeObserverPlugin,ClickScrollPlugin]);
             this.run(document);
         });
         window.bodyScrollbarsInit = () => {
@@ -40,6 +40,9 @@ export default class {
                 scrollbars:{
                     autoHide: 'scroll',
                     clickScroll: true
+                },
+                overflow: {
+                    x: 'hidden',
                 },
                 cancel: {
                     nativeScrollbarsOverlaid: true,
@@ -74,8 +77,11 @@ export default class {
         {
             showNativeOverlaidScrollbars: this.isIOS,
             scrollbars:{
-                autoHide: 'scroll',
+                // autoHide: 'scroll',
                 clickScroll: true
+            },
+            overflow: {
+                x: 'hidden',
             },
             cancel: {
                 nativeScrollbarsOverlaid: true,

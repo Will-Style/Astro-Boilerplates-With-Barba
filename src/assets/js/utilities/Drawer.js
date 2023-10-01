@@ -107,9 +107,6 @@ export default class {
                         window.drawerScrollbarsInit();
                     }
 
-                    if(window.bodyScrollbars){
-                        window.bodyScrollbars.destroy();
-                    }
                 }, 
                 onClose: () => {
                     this.opened = false;
@@ -150,9 +147,6 @@ export default class {
                 onComplete:()=>{
                     MicroModal.close(this.drawer_id);
                     
-                    if(window.bodyScrollbars){
-                        window.bodyScrollbarsInit();
-                    }
                     if(window.drawerScrollbars){
                         window.drawerScrollbars.destroy();
                     }
