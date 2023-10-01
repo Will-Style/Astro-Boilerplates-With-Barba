@@ -1,0 +1,65 @@
+---
+import Layout from '/src/layouts/Layout.astro';
+
+---
+<Layout title="Top Page" >
+
+    <main id="top" class="lower top">
+        <div class="container">
+            <header class="lower__header">
+                <h1 class="lower__header__title">
+                    <div class="lower__header__title-ja">トップページ</div>
+                    <div class="lower__header__title-en">Home</div>
+                </h1>
+            </header>
+        </div>
+        <div data-not-top>
+            <div class="container">
+                <div data-accordion>
+                    <details data-accordion-details open>
+                        <summary data-accordion-summary>Accordion01</summary>
+                        <div id="accordion-1" data-accordion-content>
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates est harum atque sapiente corporis, quis ullam laboriosam debitis veritatis, animi ab omnis placeat temporibus facilis? Cumque excepturi nulla cum earum!
+                            </div>
+                        </div>
+                    </details>
+                    <details data-accordion-details>
+                        <summary data-accordion-summary>Accordion02</summary>
+                        <div id="accordion-2" data-accordion-content>
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates est harum atque sapiente corporis, quis ullam laboriosam debitis veritatis, animi ab omnis placeat temporibus facilis? Cumque excepturi nulla cum earum!
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="c-tab" data-tab>
+                    <div class="c-tab__nav" data-tab-list>
+                        <button data-tab-item aria-controls="tab01" type="button" class="c-tab__nav--item">tab01</button>
+                        <button data-tab-item aria-controls="tab02" type="button" class="c-tab__nav--item">tab02</button>
+                        <button data-tab-item aria-controls="tab03" type="button" class="c-tab__nav--item">tab03</button>
+                    </div>
+                
+                    <div data-tab-pane id="tab01" class="c-tab__pane">
+                        <h4>Tab01</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                    </div>
+                    <div data-tab-pane id="tab02" class="c-tab__pane">
+                        <h4>Tab02</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                    </div>
+                    <div data-tab-pane id="tab03" class="c-tab__pane">
+                        <h4>Tab03</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. ...</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import "@styles/style.scss";
+
+import Meta from '/src/components/Meta.astro';
+import SkipContents from '/src/components/SkipContents.astro';
+import Intro from '/src/components/Intro.astro';
+import Header from '/src/components/Header.astro';
+import Drawer from '/src/components/Drawer.astro';
+import Footer from '/src/components/Footer.astro';
+
+export interface Props {
+	title: string;
+    namespace :string;
+    blank :boolean;
+}
+
+const { title, namespace='page' , blank = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{title}</title>
+        <script src="/src/assets/js/app.js"></script>
+	</head>
+	<body data-barba="wrapper">
+        { !blank && <SkipContents />}
+        { !blank && <Intro />}
+        { !blank && <Drawer />}
+        { !blank && <Header />}
+        <div data-barba="container" data-barba-namespace={namespace} id="content">
+            <div data-container-inn>        
+                <slot />
+                { !blank && <Footer />}
+            </div>
+        </div>
+	</body>
+</html>
+<script>
+</script>
