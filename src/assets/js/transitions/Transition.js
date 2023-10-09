@@ -19,6 +19,13 @@ export default {
              
                 await new Promise((resolve, reject) => {
 
+
+                     // ローディングの確認をしたいときはtrueに
+                    let debug = false;
+                    const keyName = 'visited';
+                    const keyValue = true;
+
+                    
                     const intro = document.querySelector('[data-intro]');
                     const overlayFirst = document.querySelector('[data-intro-overlay-first]');
                     const overlaySecond = document.querySelector('[data-intro-overlay-second]');
@@ -28,47 +35,69 @@ export default {
                         const tl = gsap.timeline({
                         });
                         
-                       
+                        this.visited = sessionStorage.getItem(keyName);
+                        if ( !this.visited || debug ) {
+                            //sessionStorageにキーと値を追加
+                            sessionStorage.setItem(keyName, keyValue);
                         
-                        // tl.to(".intro__logo__image",{
-                        //     y: 0,
-                        //     duration:1.2,
-                        //     ease:"LogoEase",
-                        //     onComplete: ()=>{
+                            // tl.to(".intro__logo__image",{
+                            //     y: 0,
+                            //     duration:1.2,
+                            //     ease:"LogoEase",
+                            //     onComplete: ()=>{
 
-                        //         gsap.to(".intro__logo__image",{
-                        //             y: "-100%",
-                        //             duration:.7,
-                        //             delay:.6,
-                        //             ease:"Power3.easeInOut",
-                        //         });
+                            //         gsap.to(".intro__logo__image",{
+                            //             y: "-100%",
+                            //             duration:.7,
+                            //             delay:.6,
+                            //             ease:"Power3.easeInOut",
+                            //         });
+                                    
+                            //     }
+                            // });
+
+                            tl.to(overlayFirst,{
+                                y: "-100%",
+                                duration:1,
+                                delay :.5,
+                                ease:"Power4.easeOut",
                                 
-                        //     }
-                        // });
+                            });
+                            tl.to(overlaySecond,{
+                                delay:.3,
+                                y: "-100%",
+                                duration:1,
+                                ease:"Expo.easeInOut",
 
-                        tl.to(overlayFirst,{
-                            y: "-100%",
-                            duration:1,
-                            delay :.5,
-                            ease:"Power4.easeOut",
-                            
-                        });
-                        tl.to(overlaySecond,{
-                            delay:.3,
-                            y: "-100%",
-                            duration:1,
-                            ease:"Expo.easeInOut",
+                                onComplete: ()=>{
+                                    gsap.set(intro,{
+                                        display:"none",
+                                    });
+                                    
+                                    const AnimationEnd = new CustomEvent('AnimationEnd');
+                                    dispatchEvent(AnimationEnd);
+                                    resolve();
+                                }
+                            },"-=1.2");
+                        }else{
+                            gsap.set(overlaySecond,{"opacity": 0})
+                            tl.to(overlayFirst,{
+                                opacity: 0,
+                                delay:.6,
+                                duration:1.2,
+                                ease:"Power1.easeOut",
 
-                            onComplete: ()=>{
-                                gsap.set(intro,{
-                                    display:"none",
-                                });
-                                
-                                const AnimationEnd = new CustomEvent('AnimationEnd');
-                                dispatchEvent(AnimationEnd);
-                                resolve();
-                            }
-                        },"-=1.2");
+                                onComplete: ()=>{
+                                    gsap.set(intro,{
+                                        display:"none",
+                                    });
+                                    
+                                    const AnimationEnd = new CustomEvent('AnimationEnd');
+                                    dispatchEvent(AnimationEnd);
+                                    resolve();
+                                }
+                            });
+                        }
                     
                     }else{
                         resolve();
