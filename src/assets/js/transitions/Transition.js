@@ -80,7 +80,7 @@ export default {
                                 }
                             },"-=1.2");
                         }else{
-                            gsap.set(overlaySecond,{"opacity": 0})
+                            gsap.set(overlaySecond,{"opacity": 0});
                             tl.to(overlayFirst,{
                                 opacity: 0,
                                 delay:.6,

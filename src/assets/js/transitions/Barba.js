@@ -3,6 +3,7 @@ import barba from '@barba/core';
 import Prevent from "./Prevent";
 import Transitions from "./Transition";
 import Disabled from "./Disabled";
+import gsap from "gsap";
 
 export default class{
 	
@@ -20,7 +21,7 @@ export default class{
         };
         window.getScrollTop = (d) => {
             if( location.hash ){
-                const anchor = d.querySelector( location.hash );
+                const anchor = document.querySelector( location.hash );
                 if(anchor){
                     const rect = anchor.getBoundingClientRect();
                     let top = rect.top ;
@@ -34,20 +35,28 @@ export default class{
         };
         window.initialScroll = (d) => {
             if( location.hash ){
-                const anchor = d.querySelector( location.hash );
+                const anchor = document.querySelector( location.hash );
                 if(anchor){
                     const rect = anchor.getBoundingClientRect();
                     const scrollTop = window.pageYOffset;
                     let top = rect.top + scrollTop;
                     const header = document.querySelector('[data-header]');
                     if(header){
-                        top = top - header.clientHeight;
+                        
+                        top = top - header.clientHeight - 30;
                     }
-                    window.scrollTo(0,top);
-
+                    if (window.Lenis) {
+                        window.Lenis.scrollTo(top);
+                    }else{
+                        window.scrollTo(0,top);
+                    }
                 }
             }else{
-                window.scrollTo(0,0);
+                if (window.Lenis) {
+                    window.Lenis.scrollTo(0);
+                }else{
+                    window.scrollTo(0,0);;
+                }
             }
         };
         barba.init({
@@ -62,25 +71,42 @@ export default class{
 
         window.barba = barba;
 
-        history.scrollRestoration = "manual";
-
         barba.hooks.once((data) => {
             window.initialScroll(document);
         });
 
-        this.scrollPosY = [0];
+        this.scrollPosY = [];
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('popstate', function(e) {
+            gsap.set(document.body,{
+                opacity:0,
+            });
+        });
+        barba.hooks.enter(async (data) => {
 
-        barba.hooks.enter((data) => {
             if(data.trigger !== "back") {
                 this.scrollPosY.push(barba.history.current.scroll.y);
             }
+            setTimeout(() => {
+                    
+                if(data.trigger === "back") {
+                    window.scrollTo(0,this.scrollPosY.pop());
+                }    
+            }, 10);
         });
         barba.hooks.after((data) => {
            
-            if(data.trigger === "back") {
-                window.scrollTo(0, this.scrollPosY.pop());
+            if(
+                data.trigger=="forward" 
+                || data.trigger=="back"
+            ){
+
+                gsap.set(document.body,{
+                    clearProps:"opacity",
+                });
             }
-            
         });
 	}
 }
