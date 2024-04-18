@@ -7,12 +7,7 @@ export default class {
     // フォームのIDを指定
     id = "#example-form";
     constructor() {
-        barba.hooks.beforeOnce((data) => {
-            this.run(document);
-        });
-        barba.hooks.enter((data) => {
-            this.run(data.next.container);
-        });
+        this.run(document);
     }
     run(d) {
         const form = d.querySelector(this.id);
@@ -32,7 +27,6 @@ export default class {
                         email: null,
                         message: null,
                         items: null,
-                        file02: null,
                     });
 
                     const methods = Methods.setup();
@@ -246,6 +240,14 @@ export default class {
                     };
 
 
+                    const params = new URLSearchParams(window.location.search);
+                    const type = ref()
+                    if(window.location.search){
+                        type.value = params.get('type')
+                        errors.value.contact_type = false
+                        console.log(errors.value)
+                        isValidates();
+                    }
 
                     return {
                         verified,
@@ -275,6 +277,7 @@ export default class {
                         files,
                         onUpload,
                         unlinkFile,
+                        type
                     };
                 }
             });
