@@ -61,7 +61,7 @@ import Layout from '/src/layouts/Layout.astro';
                                             <div class="form__row">
                                                 <label class="form__label form__require">生年月日</label>
                                                 <div class="form__content form__seperate">
-                                                    <select name="birthday.year" :value="(new Date().getFullYear() - 20)" class="form__seperate__year :sm">
+                                                    <select name="birthday.year" class="form__seperate__year :sm" v-model="year">
                                                         <option :value="d" v-text="d" v-for="d in methods.year_array()"></option>
                                                     </select>
                                                     <span>年</span>

@@ -35,6 +35,7 @@ export default class {
                     const isConfirm = ref(false);
                     
                     const data = ref({});
+                    const year = ref((new Date().getFullYear() - 20))
 
                     // 確認画面表示処理
                     const confirm = (e) => {
@@ -276,7 +277,8 @@ export default class {
                         files,
                         onUpload,
                         unlinkFile,
-                        type
+                        type,
+                        year
                     };
                 }
             });
