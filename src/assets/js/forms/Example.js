@@ -1,7 +1,7 @@
 import barba from "@barba/core";
 import Validates from "/src/assets/js/forms/Validates";
 import Methods from "/src/assets/js/forms/Methods";
-import { createApp,ref } from "https://unpkg.com/vue@3.4.21/dist/vue.esm-browser.prod.js";
+import { createApp,ref } from "vue";
 
 export default class {
     // フォームのIDを指定
@@ -35,7 +35,7 @@ export default class {
                     const isConfirm = ref(false);
                     
                     const data = ref({});
-                    const year = ref((new Date().getFullYear() - 20))
+                    const year = ref((new Date().getFullYear() - 20));
 
                     // 確認画面表示処理
                     const confirm = (e) => {
@@ -242,10 +242,10 @@ export default class {
 
 
                     const params = new URLSearchParams(window.location.search);
-                    const type = ref()
+                    const type = ref();
                     if(window.location.search){
-                        type.value = params.get('type')
-                        errors.value.contact_type = false
+                        type.value = params.get('type');
+                        errors.value.contact_type = false;
                         isValidates();
                     }
 
