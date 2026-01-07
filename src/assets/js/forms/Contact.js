@@ -31,6 +31,7 @@ export default class {
                         phone: null,
                         email: null,
                         message: null,
+                        privacy_agree: null,
                     });
 
                     const methods = Methods.setup();

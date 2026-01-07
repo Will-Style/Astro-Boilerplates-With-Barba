@@ -216,9 +216,12 @@
 													<div class="form__confirm__hidden gap-y-10 form__row">
 														<div class="form__content">
 															<p class="form__pp text-center"><a href="../pp/" class="text-underline" data-window-open target="_blank" rel="noopener noreferrer">個人情報の取り扱い</a>についてご同意の上、送信してください。</p>
+															<div class="form__pp__agree text-center pt-40">
+																<label class="form__check-label"><input name="privacy_agree" type="checkbox" value="個人情報の取り扱いに同意する" :checked="type==1" @change="notChecked">個人情報の取り扱いに同意する</label>
+															</div>
 														</div>
 													</div>
-													<div class="text-center pt-40">
+													<div class="text-center pt-10">
 														<button type="submit" class="form__submit" data-form-submit v-bind:disabled="!verified" v-bind:class="{':prosessing':prosessing}" @click="confirm">送信内容を確認する</button>
 													</div>
 													<p class="form__confirm__hidden form__pp text-center pt-40 pb-60">このサイトはreCaptchaによって保護されており、<br> Googleの<a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer" class="text-underline">プライバシーポリシー</a>と<a href="https://policies.google.com/terms?hl=ja" target="_blank" rel="noopener noreferrer" class="text-underline">利用規約</a>が適用されます。</p>
